@@ -16,7 +16,7 @@ const styles = theme => ({
     color: theme.palette.common.white,
     marginBottom: theme.spacing(5),
     marginTop: theme.spacing(8),
-    backgroundImage: 'url(https://i.imgur.com/VYBxMKp.gif)',
+    backgroundImage: 'url(https://c.tenor.com/ctFs3AfWMAIAAAAM/ffxiv-final-fantasy-xiv.gif)',
     backgroundSize: 'cover',
     backgroundRepeat: 'no-repeat',
     backgroundPosition: 'center',
@@ -69,7 +69,7 @@ return (
 <Grid item md={3.5}>
 <div className={classes.mainFeaturedPostContent} container spacing={3} justify="center">
 <Typography className={classes.title} justify="center" color="secondary" variant="h3"  style={{fontFamily: ''}}><br/><br/>
-<b>Ghibli Fan Cub Account </b>
+<b>Final Fantasy Merch Club Account </b>
 </Typography>
 <br/>
 <Typography className={classes.subTitle} justify="center" color="secondary" variant="h5" color="inherint" style={{fontFamily: ''}} paragraph> <br/> 
