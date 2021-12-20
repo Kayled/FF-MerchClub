@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-// import { Redirect, Link } from "react-router-dom";
+import { Redirect, Link } from "react-router-dom";
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';

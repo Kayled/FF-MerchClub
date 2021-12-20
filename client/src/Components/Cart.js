@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import { Route, Link, BrowserRouter as Router } from 'react-router-dom'
 import Button from '@material-ui/core/Button'
 import DeleteOutlinedIcon from '@material-ui/icons/DeleteOutlined';
-
 import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
@@ -159,7 +158,6 @@ const styles = theme => ({
         </Grid>
         </Container>
         </main>
-        {/* Footer */}
         <footer className={classes.footer}>
           <Typography variant="h6" align="center" gutterBottom>
           </Typography>

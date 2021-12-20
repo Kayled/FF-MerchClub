@@ -35,7 +35,6 @@ const styles = theme => ({
     padding: theme.spacing(3),
     [theme.breakpoints.up('md')]: {
       padding: theme.spacing(5.8),
-    //   padding: theme.spacing(40),
       paddingRight: 0,
     },
   },
@@ -49,19 +48,16 @@ class Account extends Component{
   
   handleShowForm = () => {
     this.setState({ showForm: !this.state.showForm })
-    // console.log(this.state.showForm)
   }
   
 render(){
     const {classes} = this.props
-    // console.log(this.props.currentUser)
-    // debugger 
+
 
 return (
   <div>
     <Paper className={classes.mainFeaturedPost} style={{ backgroundImage: `url(https://media.giphy.com/media/AebNPktTHrdYc/giphy.gif)`
 }}>
-{/* Increase the priority of the hero background image */}
 {<img style={{ display: 'none' }} src={`url(https://data.whicdn.com/images/159503389/original.gif)`} alt={classes.imageText} />}
 {/**/}<div className={classes.overlay} />
 

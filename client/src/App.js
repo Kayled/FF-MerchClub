@@ -205,7 +205,7 @@ class App extends React.Component {
         console.log(this.state.currentUser)
 
         const filteredItems = this.state.items.filter(item => item.game.toLowerCase().includes(this.state.filter.toLowerCase()))
-        const filteredGames = this.state.movies.filter(game => game.includes(this.state.gameFilter))
+        const filteredGames = this.state.games.filter(game => game.includes(this.state.gameFilter))
 
         return (
             <Fragment>
