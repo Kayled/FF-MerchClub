@@ -7,7 +7,6 @@ import Checkbox from '@material-ui/core/Checkbox';
 import Button from '@material-ui/core/Button';
 import { Route, Link, BrowserRouter as Router } from 'react-router-dom'
 import Paper from '@material-ui/core/Paper';
-import Copyright from '../Components/Copyright'
 import { withStyles } from '@material-ui/core/styles';
 
 
@@ -186,7 +185,6 @@ render(){
         <img  width="12%" height="5%" src="https://i.pinimg.com/originals/17/d6/74/17d674cd5d6abb3a7e893605fe3ccfec.gif"/>
         </div>
         </Paper>
-      <Copyright />
       <br/>
     </main>
     </React.Fragment>

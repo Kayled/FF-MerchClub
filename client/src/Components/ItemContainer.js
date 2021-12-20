@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import ItemCard from './ItemCard'
 import Search from './Search'
-import MovieContainer from './GameContainer'
+import GameContainer from './GameContainer'
 import MoreButton from './MoreButton'
 import BackButton from './BackButton'
 
@@ -19,13 +19,7 @@ class ItemContainer extends Component {
                     gameFilter={this.props.gameFilter}
                     updateGameFilter={this.props.updateGameFilter} />
 
-
-
-              
-
-
                     <div className="item-container" >
-
 
                         <div className="background-img">
                             <div>

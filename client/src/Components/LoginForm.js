@@ -174,7 +174,6 @@ class LoginForm extends Component {
           <br />
           <br />
         </Box>
-        <Copyright />
 
       </Container>
 

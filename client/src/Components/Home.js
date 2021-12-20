@@ -62,7 +62,6 @@ class Home extends React.Component {
           </Grid>
         </Paper>
         <br />
-        <Copyright />
         <br />
       </div>
     );

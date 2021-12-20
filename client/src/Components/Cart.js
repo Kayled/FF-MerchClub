@@ -165,7 +165,6 @@ const styles = theme => ({
           </Typography>
           <Typography variant="subtitle1" align="center" color="textSecondary" component="p">
           </Typography>
-          <Copyright />
         </footer>
         </React.Fragment>
         );

@@ -84,7 +84,6 @@ return (
 
 </Paper>
 
-<Copyright />
 </div>
 );
 }}

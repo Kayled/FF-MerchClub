@@ -1,25 +1,294 @@
-import logo from './logo.svg';
 import './App.css';
+// import ReactDOM from 'react-dom';
+import React, { Fragment } from 'react';
+import { Route, Switch, Link, Redirect, BrowserRouter as Router } from 'react-router-dom'
+import Account from './Components/Account'
+import LoginForm from './Components/LoginForm';
+import NavBar from './Components/NavBar';
+import Cart from './Components/Cart';
+import ItemContainer from './Components/ItemContainer';
+import Register from './Components/Register'
+import Home from './Components/Home'
+import Checkout from './Components/Checkout'
+import { ThemeProvider, createMuiTheme } from '@material-ui/core/styles'
+import { blue, green, red } from '@material-ui/core/colors'
+import Typography from '@material-ui/core/Typography'
+import Container from '@material-ui/core/Container'
+import { ChakraProvider } from "@chakra-ui/react"
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+
+const ItemsURL = "http://localhost:3000/items/"
+const CartsURL = "http://localhost:3000/carts/"
+const CartItemsURL = "http://localhost:3000/cart_items/"
+const UsersURL = "http://localhost:3000/users/"
+
+const theme = createMuiTheme({
+    typography: {
+        h2: {
+            fontSize: 40,
+            marginBottom: 15,
+            marginTop: 80,
+            textAlign: 'center'
+        },
+        subtitle1: {
+            fontSize: 30,
+            marginBottom: 15,
+            textAlign: 'center'
+        }
+    },
+    palette: {
+        primary: {
+            main: blue[300],
+        },
+        secondary: {
+            main: green[400],
+        },
+        error: {
+            main: red[500],
+        },
+    }
+})
+
+
+class App extends React.Component {
+
+    state = {
+        currentUser: null, 
+        loggedIn: false,
+        items: [],
+        carts: [],
+        cart_items: [],
+        filter: "All",
+        gameFilter: "",
+        games: ["Final Fantasy 7", "Final Fantasy 10", "Final Fantasy 15", "Final Fantasy 14"],
+        search: "",
+        limit: 0
+    }
+
+
+    updateCurrentUser = (user) => {
+        this.setState({
+            currentUser: user,
+            loggedIn: true,
+        });
+    };
+
+    logOut = () => {
+        this.setState({ currentUser: null, loggedIn: false })
+        localStorage.token = "";
+
+    }
+
+    logInUser = (username) => {
+        let current = this.state.users.find(
+            (user) => user.username === username
+        );
+        this.setState({ currentUser: current });
+    };
+
+
+
+    autoLogin = () => {
+        let token = localStorage.token;
+        if (typeof token !== "undefined" && token.length > 1) {
+            this.tokenLogin(token);
+        } else {
+            console.log("No token found, try logging in!");
+        }
+    };
+
+    tokenLogin = (token) => {
+        fetch("http://localhost:3000/auto_login", {
+            method: "POST",
+            headers: {
+                Accept: "application/json",
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ token: token }),
+        })
+            .then((r) => r.json())
+            .then((user) => this.updateCurrentUser(user));
+    };
+
+    componentDidMount() {
+        Promise.all([fetch(ItemsURL), fetch(CartsURL), fetch(UsersURL), fetch(CartItemsURL)])
+            .then(([res1, res2, res3, res4]) => {
+                return Promise.all([res1.json(), res2.json(), res3.json(), res4.json()])
+            })
+            .then(([items, carts, users, cart_items]) => {
+                this.setState({ items });
+                this.setState({ carts });
+                this.setState({ users });
+                this.setState({ cart_items });
+            });
+        this.autoLogin()
+    }
+
+
+    addToCart = (item) => { 
+        let addCart
+        addCart = {
+            item_id: item.id,
+            cart_id: 21 
+        };
+        let reqPack = {};
+        reqPack.method = "POST";
+        reqPack.headers = { "Content-Type": "application/json" };
+        reqPack.body = JSON.stringify(addCart);
+
+        fetch("http://localhost:3000/cart_items", reqPack)
+            .then(res => res.json())
+            .then(res => {
+                res.item = item
+                let updateCart = [...this.state.carts, res]
+                this.setState({ carts: updateCart });
+            })
+    }
+
+
+    removeFromCart = (cart_items) => {
+        console.log(cart_items, "removeFromCart function")
+
+        fetch(CartItemsURL + cart_items.id, {
+            method: "DELETE",
+        })
+            .then(res => res.json())
+            .then((res) => {
+                this.setState({
+                    carts: this.state.carts.filter((filteredCart) => filteredCart != cart_items)
+                })
+            })
+    }
+
+    patchInfo = (newInfo) => {
+        this.setState({
+            currentUser: {
+                id: newInfo.id,
+                username: newInfo.username,
+                email: newInfo.email,
+            }
+        })
+
+    }
+
+    moreItems = () => {
+        this.setState({
+            limit: this.state.limit + 4
+        })
+    }
+
+    backItems = () => {
+        this.setState({
+            limit: this.state.limit - 4
+        })
+    }
+
+    updateFilter = (filter) => {
+        this.setState({ filter })
+    }
+
+
+    updateMovieFilter = (movieFilter) => {
+        this.setState({ movieFilter })
+    }
+
+    filteredItems = () => {
+        let filtereditems = this.state.items
+        if (this.state.filter !== "All") {
+            filtereditems = filtereditems.filter(item => item.game === this.state.filter)
+        }
+        return filtereditems
+    }
+
+
+    render() {
+        console.log(this.state.currentUser)
+
+        const filteredItems = this.state.items.filter(item => item.game.toLowerCase().includes(this.state.filter.toLowerCase()))
+        const filteredGames = this.state.movies.filter(game => game.includes(this.state.gameFilter))
+
+        return (
+            <Fragment>
+                <ChakraProvider>
+                    <ThemeProvider theme={theme}>
+                        <Container maxWidth="xd">
+                            <header className="App-header">
+                                <Typography variant="h2" component="div">
+
+                                </Typography>
+                                <Typography variant="subtitle1">
+
+                                </Typography>
+                            </header>
+                            <NavBar
+                                currentUser={this.state.currentUser}
+                                logOut={this.logOut} />
+                            <Router />
+                            <Switch>
+                                <Route exact path="/" component={Home} />
+                                <Route exact path="/login" render={() => (
+                                    this.state.currentUser == null ?
+                                        <LoginForm
+                                            updateCurrentUser={this.updateCurrentUser} /> : <Redirect to="/items" />
+                                )} />
+
+                                <Route exact path="/auth">
+                                    Auth Check{" "}
+                                    {!this.state.loggedIn
+                                        ? "(Works better if you're logged in!)"
+                                        : "(Try it now you're logged in!)"}
+                                    <NavBar loggedIn={this.state.loggedIn} />
+                                </Route>
+
+                                <Route exact path="/register" component={Register} />
+                                <Route path="/carts" render={() => (
+                                    <Cart
+                                        currentUser={this.state.currentUser}
+                                        carts={this.state.carts}
+                                        removeFromCart={this.removeFromCart} />)} />
+
+                                {/* <Route exact path="/edit" render={() => */}
+                                    {/* // <EditForm */}
+                                    {/* //     currentUser={this.state.currentUser}
+                                    //     patchInfo={this.patchInfo} />} /> */}
+
+                                <Route exact path="/users" render={() =>
+                                    <Account
+                                        currentUser={this.state.currentUser} />} />
+
+                                <Route exact path="/checkout" render={() =>
+                                    <Checkout
+                                        currentUser={this.state.currentUser} />} />
+
+
+                                <Route exact path="/items" render={(props) => (
+                                    <ItemContainer
+                                        addToCart={this.addToCart}
+                                        updateCurrentUser={this.updateCurrentUser}
+                                        user={this.state.currentUser}
+                                        filter={this.state.filter}
+                                        updateFilter={this.updateFilter}
+                                        games={this.state.games}
+                                        gameFilter={this.state.gameFilter}
+                                        updateGameFilter={this.updateGameFilter}
+                                        moreItems={this.moreItems}
+                                        limit={this.state.limit}
+                                        items={this.filteredItems().slice(this.state.limit, this.state.limit + 4)}
+                                        limit={this.state.limit}
+                                        itemLength={this.state.items.length}
+                                        backItems={this.backItems} />)} />
+
+                            </Switch>
+                            <Router />
+                        </Container>
+                    </ThemeProvider>
+                </ChakraProvider>
+
+            </Fragment>
+
+        )
+    }
+
 }
 
 export default App;
