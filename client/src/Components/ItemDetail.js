@@ -1,6 +1,6 @@
 import React from "react";
 
-const ItemDetail = () => {
+function ItemDetail () {
   return (
 
     <div className='item-detail'></div>

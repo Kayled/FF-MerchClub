@@ -1,13 +1,111 @@
 body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+    /* background-size: auto; */
+    background-color: rgb(36, 135, 160);
+    /* background-image: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTnl2EJqrI99-WuSxt0QQrVgbYk-xgnhe_26Q&usqp=CAU"); */
+    background-repeat: repeat;
+    padding: auto;
+    background-size: fit;
+    /* cursor: url("https://static.wikia.nocookie.net/finalfantasy/images/3/39/FFXII_LB_Cursor.png/revision/latest/scale-to-width-down/29?cb=20120721130403"), auto; */
+
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+.headerimg{
+  height: 100px;
+  width: 100px;
+  border: 5px outset rgb(233, 240, 239);
+  border-radius: 10px;
+
+}
+h1 {
+   /* box-shadow: 0px 10px 15px 0px rgb(233, 240, 239); */
+  /* border-width: -10px; */
+   color: rgb(233, 240, 239);
+   padding: 14px 20px; 
+   margin: 36px 10px 50px 50px; 
+   /* border-radius: 10px;  */
+  font-family: "Fantasy", "Papyrus", monospace;
+  font-size: 40px;
+  word-spacing: 15px;
+  text-align: center;
+}
+
+.gif {
+  height: 500px;
+  width: 600px;
+  box-shadow: 0px 10px 15px 0px rgb(233, 240, 239);
+  border: 5px outset rgb(233, 240, 239);
+  border-radius: 10px;
+  position: center;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* .navbar {
+  /* cursor: url("https://static.wikia.nocookie.net/finalfantasy/images/3/39/FFXII_LB_Cursor.png/revision/latest/scale-to-width-down/29?cb=20120721130403"), auto; */
+  /* border: 5px outset #0c0c0a;
+  color: rgb(241, 241, 231);
+  text-align: wrap;
+  flex-wrap: wrap;
+  padding: 7px 0px;
+  margin: 36px 10px 50px 50px;
+  word-break: 10px;
+  font-family: "Lucida Console", "Courier New", monospace;
+  font-size: 40px;
+  text-align: center;
+  padding: 14px 20px;
+  border-radius: 10px;
+  box-shadow: 0px 10px 15px 0px rgba(209, 9, 9, 0.698);
+  border: 5px outset rgba(209, 9, 9, 0.698);; */
+/* } */ */
+
+.topnav {
+  background-color: rgb(233, 240, 239);
+  overflow: hidden;
+
+}
+
+/* Style the links inside the navigation bar */
+.topnav a {
+  float: right;
+  color: rgb(233, 240, 239);
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
+  border-radius: 10px;
+  box-shadow: 0px 10px 15px 0px rgb(233, 240, 239);
+  border-color:rgb(233, 240, 239);
+}
+
+/* Change the color of links on hover */
+.topnav a:hover {
+  background-color: #c79d14;;
+  color: black;
+}
+
+/* Add a color to the active/current link */
+.topnav a.active {
+  background-color: #c55724;;
+  color: white;
+  border-color:#c55724 ;
+
+}
+
+.wholeform {
+  /* margin: 36px 10px 50px 50px;   */
+  box-sizing: border-box;
+  color: rgb(233, 240, 239);
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 25px;
+  border-radius: 10px;
+  /* box-shadow: 10px 10px 15px 10px rgba(209, 9, 9, 0.698);
+  border-color:#c55724 ; */
+  /* border-width: 50px; */
 }

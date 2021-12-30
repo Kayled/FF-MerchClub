@@ -5,7 +5,7 @@ class CreateItems < ActiveRecord::Migration[6.1]
       t.string :image
       t.string :category
       t.string :description
-      t.string :movie
+      t.string :game
       t.string :price
       t.integer :quantity
 

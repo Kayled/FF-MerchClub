@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
-  resources :items
-  resources :cart_items
-  resources :carts
+  resources :items [:index, :show]
+  resources :cart_items [:index, :show, :create]
+  resources :carts [:index, :show, :create]
   patch '/users/:id', to: 'users#edit'
   resources :users
 

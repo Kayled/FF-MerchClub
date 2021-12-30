@@ -1,206 +1,44 @@
-import React, { Component } from 'react';
-import { Redirect, Link } from "react-router-dom";
-import Avatar from '@material-ui/core/Avatar';
-import Button from '@material-ui/core/Button';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import TextField from '@material-ui/core/TextField';
-import Paper from '@material-ui/core/Paper';
-import Grid from '@material-ui/core/Grid';
-import Box from '@material-ui/core/Box';
-import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
-import Typography from '@material-ui/core/Typography';
-import { withStyles } from '@material-ui/core/styles';
-import Container from '@material-ui/core/Container';
+import React from "react";
 
-const styles = theme => ({
-  paper: {
-    marginTop: theme.spacing(8),
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-  },
-  avatar: {
-    marginTop: theme.spacing(1),
-    backgroundColor: theme.palette.secondary.main,
+function Register() {
+  return (
+    <div className="wholeform">
+      <form>
+        <h3>Register</h3>
 
-  },
-  form: {
-    width: '40%',
-    marginTop: theme.spacing(1),
-    margin: theme.spacing(67)
+        <div>
+          <label>First name</label>
+          <br></br>
+          <input type="text" />
+        </div>
 
-  },
-  submit: {
-    margin: theme.spacing(3, 0, 2),
-  },
-});
+        <div>
+          <label>Last name</label>
+          <br></br>
+          <input type="text" />
+        </div>
 
+        <div>
+          <label>Email</label>
+          <br></br>
+          <input type="text" />
+        </div>
 
-class Register extends Component {
-  state = {
-    firstName: "",
-    lastName: "",
-    email: "",
-    phoneNumber: "",
-    username: "",
-    password: "",
-    created: false,
-    errorMessage: "",
-  };
+        <div>
+          <label>Password</label>
+          <br></br>
+          <input type="text" />
+        </div>
 
-  handleChange = (event) => {
-    const { name, value } = event.target;
-
-    this.setState({
-      [name]: value,
-    });
-  };
-
-  createUser = (event) => {
-    event.preventDefault();
-    const { firstName, lastName, email, phoneNumber, username, password } = this.state;
-
-    let user = {
-      first_name: firstName,
-      last_name: lastName,
-      email: email,
-      phone_number: phoneNumber,
-      username: username,
-      password: password
-
-    };
-
-    fetch("http://localhost:3000/users", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json",
-      },
-      body: JSON.stringify({ user }),
-    })
-      .then((r) => r.json())
-      .then((response) => {
-      })
-      .catch((response) =>
-        this.setState({
-          errorMessage:
-            "Uh-oh! It didn't work...Make sure your server is running!",
-        })
-      );
-  };
-
-  render() {
-    const { classes } = this.props
-
-    return (
-      <Grid container component="main" className={classes.root}>
-        <CssBaseline />
-        <Grid item xs >
-          <div className={classes.paper}>
-            <Avatar className={classes.avatar}>
-              <LockOutlinedIcon />
-            </Avatar> <br />
-            <Typography component="h1" variant="h5">
-              Register
-    </Typography>
-            <div>
-              {this.state.created ? (
-                <Redirect to="/login" />
-              ) : (
-                <div>
-                  <div>
-                    <p>{this.state.errorMessage}</p>
-                  </div>
-
-
-                  <form className={classes.form}
-                    onSubmit={this.createUser} >
-                    <TextField
-                      variant="outlined"
-                      margin="normal"
-                      required
-                      fullWidth
-                      id="firstName"
-                      label="First Name"
-                      name="firstName"
-                      autoComplete="firstname"
-                      autoFocus
-                      onChange={this.handleChange}
-                    />
-                    <TextField
-                      variant="outlined"
-                      margin="normal"
-                      required
-                      fullWidth
-                      id="lastName"
-                      label="Last Name"
-                      name="lastName"
-                      autoComplete="lastname"
-                      autoFocus
-                      onChange={this.handleChange}
-                    />
-                    <TextField
-                      variant="outlined"
-                      margin="normal"
-                      required
-                      fullWidth
-                      id="email"
-                      label="Email"
-                      name="email"
-                      autoComplete="email"
-                      autoFocus
-                      onChange={this.handleChange}
-                    />
-                    <TextField
-                      variant="outlined"
-                      margin="normal"
-                      required
-                      fullWidth
-                      id="username"
-                      label="Username"
-                      name="username"
-                      type="username"
-                      autoComplete="username"
-                      autoFocus
-                      onChange={this.handleChange}
-                    />
-                    <TextField
-                      variant="outlined"
-                      margin="normal"
-                      required
-                      fullWidth
-                      name="password"
-                      label="Password"
-                      type="password"
-                      id="password"
-                      autoComplete="current-password"
-                      onChange={this.handleChange}
-                    />
-                    <Button
-                      type="submit"
-                      fullWidth
-                      variant="contained"
-                      color="primary"
-                      className={classes.submit}
-                    >
-                      Register
-      </Button>
-                    <Grid container>
-                      <Button component={Link} to="/login" variant="contained" color="secondary" fullWidth>
-                        Log in Here after Registration!
-          </Button>
-                    </Grid>
-                    <Box mt={10}>
-                    </Box>
-                  </form>
-                </div>
-              )}
-            </div>
-          </div>
-        </Grid>
-      </Grid>
-
-    )
-  }
+        <button type="submit" className="submit">
+          Register
+        </button>
+        <p className="submit">
+          Already registered <a href="LoginForm">log in?</a>
+        </p>
+      </form>
+    </div>
+  );
 }
-export default withStyles(styles)(Register)
+
+export default Register;
