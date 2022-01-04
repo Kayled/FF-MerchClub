@@ -6,7 +6,7 @@ class ItemsController < ApplicationController
         # render json: Items.all.to_json(
         # except: [:created_at, :updated_at])
         items = Item.all
-        render json: items
+        render json: items, status: :ok
     end
     def show
         items = Items.find(params[:id])

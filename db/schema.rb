@@ -34,7 +34,7 @@ ActiveRecord::Schema.define(version: 2021_12_16_152927) do
     t.string "image"
     t.string "category"
     t.string "description"
-    t.string "movie"
+    t.string "game"
     t.string "price"
     t.integer "quantity"
     t.datetime "created_at", precision: 6, null: false
@@ -42,8 +42,6 @@ ActiveRecord::Schema.define(version: 2021_12_16_152927) do
   end
 
   create_table "users", force: :cascade do |t|
-    t.string "attributes"
-    t.string "associations"
     t.string "first_name"
     t.string "last_name"
     t.string "username"

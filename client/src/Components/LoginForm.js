@@ -33,7 +33,7 @@ function LoginForm () {
           </div>
         </div>
         <div className="button">
-          <button type="submit" className="submit" >
+          <button type="submit" className="submit" href="HomePage" >
             Sign in
           </button>
         </div>

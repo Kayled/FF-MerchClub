@@ -2,9 +2,10 @@ import React from "react";
 import ItemCard from "./ItemCard";
 import { useState, useEffect } from "react";
 
-function ItemContainer ({itemList, setItemList}) {
-  let MY_URL = "/Items";
+function ItemContainer () {
+  let MY_URL = "/items";
 
+const [itemList, setItemList] = useState([]); 
 
   const [isLoading, setIsLoading] = useState(true);
   useEffect(() => {

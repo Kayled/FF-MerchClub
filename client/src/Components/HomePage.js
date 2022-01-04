@@ -8,9 +8,9 @@ function HomePage() {
   return (
     <div>
         <NavBar2/>
-
-    
-        <ItemContainer/>
+        <br/>
+        <br/>
+        <ItemContainer />
     </div>
         
       
