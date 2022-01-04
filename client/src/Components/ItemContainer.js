@@ -1,40 +1,30 @@
-import React, { Component } from 'react'
-import ItemCard from './ItemCard'
-import Search from './Search'
-import GameContainer from './GameContainer'
-import MoreButton from './MoreButton'
-import BackButton from './BackButton'
+import React from "react";
+import ItemCard from "./ItemCard";
+import { useState, useEffect } from "react";
 
+function ItemContainer () {
+  let MY_URL = "/items";
 
+const [itemList, setItemList] = useState([]); 
 
-class ItemContainer extends Component {
+  const [isLoading, setIsLoading] = useState(true);
+  useEffect(() => {
+    fetch(MY_URL)
+      .then((resp) => resp.json())
+      .then((data) => {
+        console.log(data);
+        setItemList(data);
+        setIsLoading(false);
+      });
+  }, []);
 
+  if (isLoading) return <div>Content is Loading</div>;
 
-    render() {
-        return (
-            <div className="search">
-                <Search
-                    updateFilter={this.props.updateFilter}
-                    games={this.props.games}
-                    gameFilter={this.props.gameFilter}
-                    updateGameFilter={this.props.updateGameFilter} />
+  const itemCards = itemList.map((item) => (
+    <ItemCard key={item.id} item={item} />
+  ));
 
-                    <div className="item-container" >
-
-                        <div className="background-img">
-                            <div>
-                                {this.props.limit + 1 < this.props.itemLength ? <span><br /><MoreButton moreItems={this.props.moreItems} items={this.props.items} /></span> : null}
-                                {this.props.items.map(item => <ItemCard item={item} addToCart={this.props.addToCart} removeFromCart={this.props.removeFromCart} updateCurrentUser={this.props.updateCurrentUser} user={this.props.currentUser} />)}
-                                {this.props.limit == 0 ? null : <span><br /><BackButton backItems={this.props.backItems} items={this.props.items} /><br /></span>} <br /><br />
-                            </div>
-                        </div>
-                    </div>
-                
-            </div>
-
-
-        )
-    }
-};
+  return <div class="Card">{itemCards}</div>;
+}
 
 export default ItemContainer;
